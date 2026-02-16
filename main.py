@@ -1,6 +1,6 @@
-import network
-import espnow
-import machine
+import network # type: ignore
+import espnow # type: ignore
+import machine # type: ignore
 import struct
 import time
 
