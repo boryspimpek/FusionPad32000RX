@@ -4,12 +4,41 @@ import machine # type: ignore
 import struct
 import time
 
-# --- KONFIGURACJA PINÓW ---
+# --- KONFIGURACJA PINÓW I KANAŁÓW RC ---
+# Mapowanie standardu AETR (Aileron, Elevator, Throttle, Rudder)
+# oraz przycisków pomocniczych (AUX) i potencjometru.
+#                   ESP32-C3 Zero
+#                      TOP VIEW
+#                ____________________
+#               |    USB-C           |
+#               |_____________ ______|
+#               | [ ] 5V      21 [ ] |
+#               | [ ] GND     20 [ ] |
+#               | [ ] 3.3v    19 [ ] |
+#               | [ ] 0       18 [ ] | 
+#               | [ ] 1       10 [ ] | 
+#           CH4 | [ ] 2        9 [ ] |
+#           CH3 | [ ] 3        8 [ ] | CH7 (Potencjometr)
+#           CH2 | [ ] 4        7 [ ] | CH6 (Toggle Button)
+#           CH1 | [ ] 5        6 [ ] | CH5  (Toggle Button)
+#               |____________________|
+#                  
+
+
+
+# PWM_CHANNELS: 
 PWM_CHANNELS = {
-    0: 5, 1: 4, 2: 3, 3: 2, 6: 8
+    0: 5,  # CH1: Aileron (Lotki) - prawy drążek (lewo/prawo)
+    1: 4,  # CH2: Elevator (Wysokość) - prawy drążek (góra/dół)
+    2: 3,  # CH3: Throttle (Gaz/Przepustnica) - lewy drążek (góra/dół)
+    3: 2,  # CH4: Rudder (Kierunek) - lewy drążek (lewo/prawo)
+    6: 8   # CH5: Potencjometr (Sterowanie płynne dodatkowe)
 }
+
+# DIGITAL_CHANNELS: 
 DIGITAL_CHANNELS = {
-    4: 6, 5: 7
+    4: 6,  # CH6: Toggle Button 1 (Przełącznik dwupozycyjny)
+    5: 7   # CH7: Toggle Button 2 (Przełącznik dwupozycyjny)
 }
 
 pwms = {}
