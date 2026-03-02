@@ -109,10 +109,6 @@ while True:
                     # Sprawdzamy czy zmiana jest większa niż DEADZONE (dla płynnych kanałów)
                     if abs(data[i] - last_data[i]) > DEADZONE:
                         nazwa = f"CH{i+1}"
-                        # Specjalne opisy dla konkretnych kanałów
-                        if i == 2: nazwa = "THROTTLE (CH3)"
-                        if i == 4 or i == 5: nazwa = f"PRZEŁĄCZNIK (CH{i+1})"
-                        
                         print(f"[*] Ruch na {nazwa}: {data[i]} us")
             
             last_data = data # Zapamiętaj obecny stan
